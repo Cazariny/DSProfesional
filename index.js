@@ -24,10 +24,10 @@ app.use((req, res, next) => {
 // Conexión a la base de datos
 const connection = mysql.createPool({
     host: process.env.DB_HOST ||'localhost',
-    port: process.env.DB_HOST ||3306,
-    user: process.env.DB_HOST ||'root',
-    password: process.env.DB_HOST ||'',
-    database: process.env.DB_HOST ||'dbempleados',
+    port: process.env.DB_PORT ||3306,
+    user: process.env.DB_USER ||'root',
+    password: process.env.DB_PASSWORD ||'',
+    database: process.env.DB_DATABASE ||'dbempleados',
     waitForConnections: true,
     connectionLimit: process.env.DB_CONNECTION_LIMIT ? parseInt(process.env.DB_CONNECTION_LIMIT, 10) : 10,
     queueLimit: 0
@@ -89,7 +89,7 @@ app.get('/empleados', (req, res) => {
 });
 
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
